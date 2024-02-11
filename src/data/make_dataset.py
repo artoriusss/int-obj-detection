@@ -1,4 +1,4 @@
-from file_helpers import dcm_to_jpg, row_to_txt_file, get_patient_ids, data_to_yolo_format
+from file_helpers import *
 from path import *
 
 import pandas as pd 
@@ -24,10 +24,10 @@ config_obj = {
     'names': ['pneumonia']
 }
 
-print(config_obj)
-
 path_yaml = str(os.path.join(PROCESSED_DIR,'config.yaml'))
 
 with open(path_yaml, 'w') as file:
     yaml.dump(config_obj, file, default_flow_style=False, 
                 sort_keys=False, indent=4, allow_unicode=False)
+
+load_test_images(DCM_RAW_TEST, TEST_DIR)

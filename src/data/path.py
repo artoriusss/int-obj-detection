@@ -24,3 +24,6 @@ JPG_DIR       =   DATA_DIR / 'processed' / 'images'
 TXT_DIR       =   DATA_DIR / 'processed' / 'labels'
 
 PROCESSED_DIR =   DATA_DIR / 'processed'
+
+DCM_RAW_TEST  =   RAW_DIR / 'stage_2_test_images'
+TEST_DIR      =   DATA_DIR / 'test' 
