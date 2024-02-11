@@ -3,7 +3,7 @@ INT-2024 RSNA Pneumonia Detection Challenge
 
 # Introduction
 
-This repository contains our implementation of the YOLOv8 model on [RSNA Pneumonia Detection Challenge Dataset](https://www.kaggle.com/competitions/rsna-pneumonia-detection-challenge/overview). By running main.py, you can directly download and save dataset locally. Then we can either train the new YOLOv8 through train.py file or load weights of our pretrained YOLOv8 model (trained on 100 epochs) through inference.py. 
+This repository contains our implementation of the YOLOv8 model on [RSNA Pneumonia Detection Challenge Dataset](https://www.kaggle.com/competitions/rsna-pneumonia-detection-challenge/overview). By running main.py, you can directly download and save dataset locally. Then we can either train the new YOLOv8 through `train.py` file or load weights of our pretrained YOLOv8 model (trained on 100 epochs) through `inference.py`. 
 
 To install the project, in the root directory run:
 
