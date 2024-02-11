@@ -97,25 +97,13 @@ def data_to_yolo_format(input_img_dir, train_labels_df, img_dir, label_dir, trai
         dcm_to_jpg(input_img_dir, img_final_dir, patient_id)
         row_to_txt_file(label_final_dir, patient_id,data)
 
-# def data_to_yolo_format(input_img_dir, train_labels_df, img_dir, label_dir, train_ids):
-#     """
-#     Convert the DICOM images and label dataframe to the YOLO format.
-#     Args:
-#         input_img_dir (str): The directory containing the DICOM images.
-#         train_labels_df (pd.DataFrame): The label dataframe.
-#         img_dir (str): The directory to save the JPEG images.
-#         label_dir (str): The directory to save the label txt files.
-#         train_ids (list): A list of patient IDs for the training set.
-#     """
-
-#     for row in tqdm(train_labels_df.values):
-#         patient_id = row[0]
-#         data = row[1:]
-        
-#         final_dir_name = 'train' if patient_id in train_ids else 'val'
-        
-#         img_final_dir =  img_dir
-#         label_final_dir = label_dir
-        
-#         dcm_to_jpg(input_img_dir, img_final_dir, patient_id)
-#         row_to_txt_file(label_final_dir, patient_id,data)
+def load_test_images(input_img_dir, img_dir):
+    """
+    Load test DICOM images to JPEG format, and save converted JPEG images to img_dir.
+    Args:
+        input_img_dir (str): The directory containing the DICOM images.
+        img_dir (str): The directory to save the JPEG images.
+    """
+    for filename in os.listdir(input_img_dir):
+        patient_id = os.path.splitext(filename)[0]
+        dcm_to_jpg(input_img_dir, img_dir, patient_id)
