@@ -12,7 +12,7 @@ class Inference:
 
     def predict(self, test_images_dir):
         print('Predicting...')
-        results = self.model.predict(test_images_dir, conf=0.85, verbose=False)
+        results = self.model.predict(test_images_dir, conf=0.08)
         print('Finished...')
         print('Creating submission...')
 

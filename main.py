@@ -19,12 +19,11 @@ def main():
     data_prep.load_test_images()
 
     train_model = Train()
-    train_model.train()
+    # uncomment to train
+    # train_model.train()
 
     inference = Inference(CST_WEIGHTS_PATH)
     inference.predict(TEST_IMGS_DIR)
-
-
     
 if __name__ == '__main__':
     main()
