@@ -7,13 +7,13 @@ This repository contains our implementation of the YOLOv8 model on [RSNA Pneumon
 
 To install the project, in the root directory run:
 
-pip3 install -r requirements.txt
+`pip3 install -r requirements.txt`
 
 Please note that after running the project yo'll be prompted to enter your Kaggle credentials to download the dataset.
 
 After running the model and prediction, you'll find the submission 
 
-pneumonia-detection/int-obj-detection/reports/submission.csv
+`pneumonia-detection/int-obj-detection/reports/submission.csv`
 
 # YOLOv8 Model
 
@@ -66,3 +66,20 @@ Here are couple of the reasons why we choce of YOLO v8 as our model:
 
 
 --------
+
+# Troubleshooting
+
+You may incounter this type of error before running predictions.
+
+![error](images/error.jpg)
+
+if this happens, please run 
+
+`/usr/local/bin/python3 -m pip`
+
+in your terminal. After that, comment out this part of `main.py` file to avoid loading dataset again:
+
+![error](images/main.jpg)
+
+
+After that you'll successfully run predictions and will be able to access the submission file: `pneumonia-detection/int-obj-detection/reports/submission.csv`.
