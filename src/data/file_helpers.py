@@ -2,6 +2,25 @@ import pydicom
 import cv2
 import os
 from tqdm import tqdm
+import pandas as pd
+import numpy as np
+
+
+def get_patient_ids(folder_path):
+    """
+    Get the patient IDs from the filenames in the specified directory.
+    Args:
+        folder_path (str): The directory containing the patient images.
+    Returns:
+        patient_ids (list): A list of patient IDs.
+    """
+    patient_ids = []
+
+    for filename in os.listdir(folder_path):
+        patient_id = os.path.splitext(filename)[0]
+        patient_ids.append(patient_id)
+
+    return patient_ids
 
 def dcm_to_jpg(dcm_dir: str, jpg_dir: str, patient_id):
     """
@@ -23,7 +42,7 @@ def dcm_to_jpg(dcm_dir: str, jpg_dir: str, patient_id):
 
     img_greyscale = pydicom.read_file(dcm_img_path).pixel_array
     img_rgb = np.stack([img_greyscale]*3, -1)
-    cv2.imwrite(jpg_img_path,img_rgb) 
+    cv2.imwrite(jpg_img_path, img_rgb) 
 
 
 def row_to_txt_file(label_dir: str, patient_id, data=None):
@@ -38,7 +57,8 @@ def row_to_txt_file(label_dir: str, patient_id, data=None):
 
     if pd.isnull(data).any():
         return
-    
+
+    print('\n',data[0],data[1],'\n') 
     x_rel = data[0]/img_size
     y_rel = data[1]/img_size
     width_rel = data[2]/img_size
@@ -49,33 +69,16 @@ def row_to_txt_file(label_dir: str, patient_id, data=None):
     
     label_path = os.path.join(label_dir,f'{patient_id}.txt')
     
-    with open(label_path, 'a+') as file:
+    with open(label_path, 'w') as file:
         line = f'0 {center_x_rel} {center_y_rel} {width_rel} {height_rel}\n'
         file.write(line)
 
 
-def get_patient_ids(folder_path):
-    """
-    Get the patient IDs from the filenames in the specified directory.
-    Args:
-        folder_path (str): The directory containing the patient images.
-    Returns:
-        patient_ids (list): A list of patient IDs.
-    """
-    patient_ids = []
-
-    for filename in os.listdir(folder_path):
-        patient_id = os.path.splitext(filename)[0]
-        patient_ids.append(patient_id)
-
-    return patient_ids
-
-
-def data_to_yolo_format(inut_img_dir, train_labels_df, img_dir, label_dir, train_ids):
+def data_to_yolo_format(input_img_dir, train_labels_df, img_dir, label_dir, train_ids):
     """
     Convert the DICOM images and label dataframe to the YOLO format.
     Args:
-        inut_img_dir (str): The directory containing the DICOM images.
+        input_img_dir (str): The directory containing the DICOM images.
         train_labels_df (pd.DataFrame): The label dataframe.
         img_dir (str): The directory to save the JPEG images.
         label_dir (str): The directory to save the label txt files.
@@ -88,8 +91,8 @@ def data_to_yolo_format(inut_img_dir, train_labels_df, img_dir, label_dir, train
         
         final_dir_name = 'train' if patient_id in train_ids else 'val'
         
-        img_final_dir =  os.path.join(img_dir,  final_dir_name)
-        label_final_dir = os.path.join(label_dir,  final_dir_name)
+        img_final_dir =  img_dir
+        label_final_dir = label_dir
         
-        dcm_to_jpg(inut_img_dir,img_final_dir,patient_id)
-        row_to_txt_file(label_final_dir,patient_id,data)
+        dcm_to_jpg(input_img_dir, img_final_dir, patient_id)
+        row_to_txt_file(label_final_dir, patient_id,data)

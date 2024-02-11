@@ -1,30 +1,31 @@
-# -*- coding: utf-8 -*-
-import click
-import logging
+from file_helpers import dcm_to_jpg, row_to_txt_file, get_patient_ids, data_to_yolo_format
+
+import pandas as pd 
+import os
 from pathlib import Path
-from dotenv import find_dotenv, load_dotenv
 
+cur_dir = os.path.join(os.path.dirname(__file__))
+cur_dir = Path(cur_dir).resolve()
 
-@click.command()
-@click.argument('input_filepath', type=click.Path(exists=True))
-@click.argument('output_filepath', type=click.Path())
-def main(input_filepath, output_filepath):
-    """ Runs data processing scripts to turn raw data from (../raw) into
-        cleaned data ready to be analyzed (saved in ../processed).
-    """
-    logger = logging.getLogger(__name__)
-    logger.info('making final data set from raw data')
+data_dir = cur_dir.parents[1] / 'data'
+raw_data_dir = data_dir / 'raw' / 'rsna-pneumonia-detection-challenge'
 
+train_images_dir = raw_data_dir / 'stage_2_train_images'
+labels_path = raw_data_dir / 'stage_2_train_labels.csv'
 
-if __name__ == '__main__':
-    log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-    logging.basicConfig(level=logging.INFO, format=log_fmt)
+patient_ids = get_patient_ids(raw_data_dir/'stage_2_train_images')
+labels_df = pd.read_csv(labels_path)
 
-    # not used in this stub but often useful for finding various files
-    project_dir = Path(__file__).resolve().parents[2]
+RAW_DCM_TRAIN = raw_data_dir / 'stage_2_train_images'
+RAW_CSV_TRAIN = raw_data_dir / 'stage_2_train_labels.csv'
 
-    # find .env automagically by walking up directories until it's found, then
-    # load up the .env entries as environment variables
-    load_dotenv(find_dotenv())
+TXT_DIR_TRAIN = data_dir / 'processed' / 'labels' / 'train'
+JPG_DIR_TRAIN = data_dir / 'processed' / 'images' / 'train'
 
-    main()
+#TXT_DIR_VAL = cur_dir.parents[1] / 'data' / 'processed' / 'labels' / 'val'
+#JPG_DIR_VAL = cur_dir.parents[1] / 'data' / 'processed' / 'images' / 'val'
+
+os.makedirs(TXT_DIR_TRAIN, exist_ok=True)
+os.makedirs(JPG_DIR_TRAIN, exist_ok=True)
+
+data_to_yolo_format(RAW_DCM_TRAIN, labels_df, JPG_DIR_TRAIN, TXT_DIR_TRAIN, patient_ids)
