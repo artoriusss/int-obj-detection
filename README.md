@@ -3,17 +3,17 @@ INT-2024 RSNA Pneumonia Detection Challenge
 
 # Introduction
 
-This repository contains our implementation of the YOLOv8 model on [RSNA Pneumonia Detection Challenge Dataset](https://www.kaggle.com/competitions/rsna-pneumonia-detection-challenge/overview). By running `main.py`, you can directly download and save dataset locally. Then we can either train the new YOLOv8 through `train.py` file or load weights of our pretrained YOLOv8 model (trained on 100 epochs) through `inference.py`. 
+This repository contains our implementation of the YOLOv8 model on [RSNA Pneumonia Detection Challenge Dataset](https://www.kaggle.com/competitions/rsna-pneumonia-detection-challenge/overview). By running main.py, you can directly download and save dataset locally. Then we can either train the new YOLOv8 through train.py file or load weights of our pretrained YOLOv8 model (trained on 100 epochs) through inference.py. 
 
 To install the project, in the root directory run:
 
-`pip3 install -r requirements.txt`
+pip3 install -r requirements.txt
 
 Please note that after running the project yo'll be prompted to enter your Kaggle credentials to download the dataset.
 
-After running the model and prediction, you'll find the submission file in the following directory:
+After running the model and prediction, you'll find the submission 
 
-`pneumonia-detection/int-obj-detection/reports/submission.csv`
+pneumonia-detection/int-obj-detection/reports/submission.csv
 
 # YOLOv8 Model
 
@@ -34,42 +34,35 @@ Here are couple of the reasons why we choce of YOLO v8 as our model:
     ├── LICENSE
     ├── README.md          
     ├── data
-    │   ├── external       
-    │   ├── interim        
     │   ├── processed      
     |   ├── test 
-    │   └── raw            
-    │
-    ├── models            
+    │   └── raw             
     │
     ├── notebooks          
     │
     ├── reports            
-    │   └── figures        
+    │   └── submission.csv        
     │
     ├── requirements.txt   
-    │                         
-    │
-    ├── setup.py           
+    │                                   
     ├── src                
     │   ├── __init__.py    
     │   │
     │   ├── data           
-    │   │   ├──  make_dataset.py
-    |   |   ├── loader.py
-    |   |   ├── path.py
-    |   |   └── file_helper.py
+    │   │   ├── authenticator.py
+    │   │   ├── data_prep.py
+    │   │   ├── data_prep.py
+    |   |   ├── file_helper.py
+    |   |   ├── kaggle_dataset.py
+    |   |   └── path.py
     │   │
     │   ├── models  
+    |   |   ├── weights      
+    |   |   |   └── best.pt       
     |   |   ├── __init__.py       
-    │   │   ├── path.py         
-    │   │   ├── predict.py
-    |   |   ├── train.py
-    |   |   ├── inference.py
-    │   │   └── predict_and_save.py
-    │   
+    │   │   ├── inference.py         
+    │   │   ├── path.py
+    |   |   └──  train.py
 
 
 --------
-
-<p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
