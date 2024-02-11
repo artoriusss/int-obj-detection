@@ -1,6 +1,6 @@
 import os
-import data.file_helpers as file_helpers
-from path import *
+import src.main.file_helper as file_helper
+from src.main.path import *
 
 import pandas as pd 
 import yaml
@@ -11,7 +11,7 @@ from pathlib import Path
 class DataPrep():
 
     def __init__(self):
-        self.helper = file_helpers.FileHelper()
+        self.helper = file_helper.FileHelper()
         self._create_dirs()
     
     def _create_dirs():

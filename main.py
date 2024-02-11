@@ -1,4 +1,4 @@
-from src.data import make_dataset
+from src.main import make_dataset
 
 def main():
     data = make_dataset.DataPrep()
@@ -6,8 +6,6 @@ def main():
     data.create_config()
     data.load_test_images()
     
-
-
 if __name__ == '__main__':
     main()
 

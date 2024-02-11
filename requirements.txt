@@ -1,0 +1,6 @@
+pydicom
+opencv-python
+tqdm
+pandas
+numpy
+

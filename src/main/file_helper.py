@@ -5,9 +5,7 @@ from tqdm import tqdm
 import pandas as pd
 import numpy as np
 
-
 class FileHelper():
-
     def get_patient_ids(folder_path):
         """
         Get the patient IDs from the filenames in the specified directory.
