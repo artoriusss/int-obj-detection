@@ -1,7 +1,6 @@
 import pandas as pd
 import os
 from pathlib import Path
-from file_helpers import get_patient_ids
 
 cur_dir       =   os.path.join(os.path.dirname(__file__))
 cur_dir       =   Path(cur_dir).resolve()
@@ -11,7 +10,6 @@ RAW_DIR       =   DATA_DIR / 'raw' / 'rsna-pneumonia-detection-challenge'
 
 labels_path   =   RAW_DIR / 'stage_2_train_labels.csv'
 
-patient_ids   =   get_patient_ids(RAW_DIR/'stage_2_train_images')
 labels_df     =   pd.read_csv(labels_path)
 
 cur_dir       =   os.path.join(os.path.dirname(__file__))
