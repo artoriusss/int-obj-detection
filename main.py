@@ -1,4 +1,4 @@
-from src.main import make_dataset
+from src.data import make_dataset
 
 def main():
     data = make_dataset.DataPrep()

@@ -1,6 +1,6 @@
 import os
-import src.main.file_helper as file_helper
-from src.main.path import *
+import src.data.file_helper as file_helper
+from src.data.path import *
 
 import pandas as pd 
 import yaml
