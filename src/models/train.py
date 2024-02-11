@@ -1,6 +1,7 @@
 from ultralytics import YOLO
-from path import *
-import os 
+from src.models.path import CONFIG_PATH
 
-model = YOLO('yolov8n.pt')
-results = model.train(data=CONFIG_PATH, epochs=1, imgsz=640, batch=-1)
+class Train():
+    def train(self, epochs=100,imgsize=640,batchsize=-1):
+        model = YOLO('yolov8n.pt')
+        model.train(data=CONFIG_PATH, epochs=epochs, imgsz=imgsize, batch=batchsize)
