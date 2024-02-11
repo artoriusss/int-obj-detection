@@ -21,11 +21,13 @@ config_obj = {
     'train': str(JPG_DIR / 'train'),
     'val': str(JPG_DIR / 'val'),
     
-    'names': {
-        0: 'pneumonia'
-    }
+    'names': ['pneumonia']
 }
 
-path_yaml = os.path.join(PROCESSED_DIR,'config.yaml')
+print(config_obj)
+
+path_yaml = str(os.path.join(PROCESSED_DIR,'config.yaml'))
+
 with open(path_yaml, 'w') as file:
-    yaml.dump(config_obj, file, default_flow_style=False, sort_keys=False, indent=4, allow_unicode=False)
+    yaml.dump(config_obj, file, default_flow_style=False, 
+                sort_keys=False, indent=4, allow_unicode=False)
